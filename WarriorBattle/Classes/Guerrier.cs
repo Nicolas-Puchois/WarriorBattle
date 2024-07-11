@@ -13,18 +13,16 @@ namespace WarriorBattle.Classes
         private string _nom;
         private int _pointDeVie;
         private int _nbAttaques;
-        private int _valeurAttaque;
-        private int _degats;
+        private bool _isAlive;
 
         //Propriété
         public string Nom { get => _nom; set => _nom = value; }
         public int PointsdeVie { get => _pointDeVie; set => _pointDeVie = value; }
 
+        public bool IsAlive { get => _isAlive; set => _isAlive = value;}
         public int NbdeDesAttaque { get => _nbAttaques; set => _nbAttaques = value; }
 
-        public int ValeurAttaque { get => _valeurAttaque; set => _valeurAttaque = value; }
 
-        public int Degats { get => _degats; set => _degats = value; }
 
         //constructeur
         public Guerrier(string nom, int pointsDeVie, int nbAttaques)
@@ -38,62 +36,60 @@ namespace WarriorBattle.Classes
 
         public int Fight()
         {
+            int damage;
+            damage = 0;
             for(int i = 0; i < NbdeDesAttaque; i++)
             {
-                RandomGenerator();
-                Degats += ValeurAttaque;
+                Random rng = new Random();
+                damage = rng.Next(0, 7);
+                damage += damage;
                 
             }
-            return ValeurAttaque;
+            return damage;
         }
 
         //methode
-        public int CheckVie()
+        public void CheckVie(int degats)
         {
-            Degats = ValeurAttaque;
-            PointsdeVie -= Degats;
+            
             if (PointsdeVie < 0 || PointsdeVie == 0)
             {
                 PointsdeVie = 0;
-                Console.WriteLine($"L'attaque a tué avec une valeur de {ValeurAttaque} PV à {Nom}, il lui reste donc reste {PointsdeVie}");
-                return PointsdeVie;
+                Console.WriteLine($"L'attaque a tué avec une valeur de {degats} PV à {Nom}, il lui reste donc reste {PointsdeVie}");
+                return;
             }
 
             else if (PointsdeVie > 0)
             {
-                Console.WriteLine($"\nL'attaque a enlevé {ValeurAttaque} PV à {Nom}, il reste {PointsdeVie}\n");
-                return PointsdeVie;
+                PointsdeVie -= degats;
+                Console.WriteLine($"\nL'attaque a enlevé {degats} PV à {Nom}, il reste {PointsdeVie}\n");
+                return;
             }
             else
             {
-                return PointsdeVie;
+                return;
             }
 
         }
 
         public void ContreAttaque()
         {
+            Fight();
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"L'autre guerrier a riposté");
             Console.ForegroundColor = ConsoleColor.White;
-            Fight();
             return;
         }
 
         public void JoueurMessage()
         {
+            Fight();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nTour du Joueur");
             Console.ForegroundColor = ConsoleColor.White;
-            Fight();
             return;
         }
 
-        public int RandomGenerator()
-        {
-            Random rng = new Random();
-            ValeurAttaque = rng.Next(1,7);
-            return ValeurAttaque;
-        }
+
     }
 }
