@@ -1,13 +1,10 @@
 ﻿using WarriorBattle.Classes;
 
-int valeurDesAttaque;
-valeurDesAttaque = 1;
+List<Guerrier> listeGuerrier = new List<Guerrier>();
 
 
 Guerrier Joueur = new Guerrier("Joueur du Guerrier", 100, 3);
 Guerrier Enemie = new Guerrier("Maichan pa bo", 100, 1);
-Elfe Sylvain = new Elfe("Sylvain", 75,3);
-Nain PadIde = new Nain("PadIdé", 125, 50,2);
 
 /*
 Console.WriteLine(Sylvain.Nom);
@@ -24,8 +21,20 @@ void Combats()
 
     while (Joueur.PointsdeVie > 0 && Enemie.PointsdeVie > 0)
     {
-        Processus();
+        if (Joueur.PointsdeVie < 0 || Enemie.PointsdeVie < 0)
+        {
+            Winner();
+
+        }
+        else 
+        {
+            ProcessusJoueur();
+            ProcessusAdversaire();
+        }
     }
+}
+void Winner()
+{
     if (Joueur.PointsdeVie == 0)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -39,16 +48,45 @@ void Combats()
         Console.ForegroundColor = ConsoleColor.White;
     }
 }
-
-void Processus()
+void ProcessusJoueur()
 {
     Joueur.JoueurMessage();
-    Enemie.Degats = Joueur.ValeurAttaque;
-    Enemie.CheckVie();
+    Enemie.CheckVie(Joueur.Fight());
+}
+void ProcessusAdversaire()
+{
     Enemie.ContreAttaque();
-    Joueur.Degats = Enemie.ValeurAttaque;
-    Joueur.CheckVie();
-    
+    Joueur.CheckVie(Enemie.Fight());
+
+}
+
+void CreationPersonnage()
+{
+    string nomPersonnage = "Boby";
+    int pointsDeVie = 0;
+    int nombreLancer = 0;
+    int bouclierPosseder = 0;
+    int choixRace = 0;
+
+    switch (choixRace)
+    {
+        case 1:
+            Guerrier Nom = new Guerrier(nomPersonnage, pointsDeVie, nombreLancer);
+            break;
+        case 2:
+            Nain Nom1 = new Nain(nomPersonnage, pointsDeVie, nombreLancer, bouclierPosseder);
+            listeGuerrier.Add(Nom1);
+            break;
+        case 3:
+            Elfe Nom2 = new Elfe(nomPersonnage, pointsDeVie, nombreLancer);
+            break;
+        case 0:
+            break;
+        default:
+            Guerrier Boby = new Guerrier("Boby", 100, 3);
+            break;
+    }
+
 }
 
 Combats();
