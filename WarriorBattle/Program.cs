@@ -1,37 +1,22 @@
 ﻿using WarriorBattle.Classes;
 
 List<Guerrier> listeGuerrier = new List<Guerrier>();
-
-
 Guerrier Joueur = new Guerrier("Joueur du Guerrier", 100, 3);
 Guerrier Enemie = new Guerrier("Maichan pa bo", 100, 1);
-
-/*
-Console.WriteLine(Sylvain.Nom);
-Console.WriteLine(PadIde.Nom);
-Console.WriteLine(Joueur.Nom);
-Console.WriteLine(Enemie.Nom);
-*/
-
-
 
 void Combats()
 {
     Console.WriteLine("--- Debut Du Combat ---");
-
     while (Joueur.PointsdeVie > 0 && Enemie.PointsdeVie > 0)
     {
-        if (Joueur.PointsdeVie < 0 || Enemie.PointsdeVie < 0)
-        {
-            Winner();
-
-        }
-        else 
-        {
-            ProcessusJoueur();
+        if (Enemie.PointsdeVie > 0 && Joueur.PointsdeVie > 0) { 
+        ProcessusJoueur();
             ProcessusAdversaire();
         }
     }
+    Enemie.CheckVie(Joueur.Fight());
+    Joueur.CheckVie(Enemie.Fight());
+    Winner();
 }
 void Winner()
 {

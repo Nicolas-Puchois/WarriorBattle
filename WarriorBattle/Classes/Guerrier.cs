@@ -13,13 +13,11 @@ namespace WarriorBattle.Classes
         private string _nom;
         private int _pointDeVie;
         private int _nbAttaques;
-        private bool _isAlive;
 
         //Propriété
         public string Nom { get => _nom; set => _nom = value; }
         public int PointsdeVie { get => _pointDeVie; set => _pointDeVie = value; }
 
-        public bool IsAlive { get => _isAlive; set => _isAlive = value;}
         public int NbdeDesAttaque { get => _nbAttaques; set => _nbAttaques = value; }
 
 
