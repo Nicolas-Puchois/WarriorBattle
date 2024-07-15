@@ -12,8 +12,8 @@ void Combats()
             ProcessusJoueur();
             ProcessusAdversaire();
     }
-    Enemie.CheckVie(Joueur.Fight());
-    Joueur.CheckVie(Enemie.Fight());
+    Joueur.CheckVie(0);
+    Enemie.CheckVie(0);
     Winner();
 }
 void Winner()
