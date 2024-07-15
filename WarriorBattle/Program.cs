@@ -1,6 +1,6 @@
 ﻿using WarriorBattle.Classes;
 
-List<Guerrier> listeGuerrier = new List<Guerrier>();
+
 Guerrier Joueur = new Guerrier("Joueur du Guerrier", 100, 3);
 Guerrier Enemie = new Guerrier("Maichan pa bo", 100, 1);
 
@@ -9,10 +9,8 @@ void Combats()
     Console.WriteLine("--- Debut Du Combat ---");
     while (Joueur.PointsdeVie > 0 && Enemie.PointsdeVie > 0)
     {
-        if (Enemie.PointsdeVie > 0 && Joueur.PointsdeVie > 0) { 
-        ProcessusJoueur();
+            ProcessusJoueur();
             ProcessusAdversaire();
-        }
     }
     Enemie.CheckVie(Joueur.Fight());
     Joueur.CheckVie(Enemie.Fight());
@@ -47,6 +45,7 @@ void ProcessusAdversaire()
 
 void CreationPersonnage()
 {
+    List<Guerrier> listeGuerrier = new List<Guerrier>();
     string nomPersonnage = "Boby";
     int pointsDeVie = 0;
     int nombreLancer = 0;
